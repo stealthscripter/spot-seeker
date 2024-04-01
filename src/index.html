@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script defer src="/js/app.js"></script>
+  </head>
+  <body class="font-Lato bg-slate-100">
+    <!--MAIN SECTION-->
+    <section class="">
+      <h1 class="text-5xl text-center mt-36 font-bold uppercase">
+        Spot <span class="text-orange-600">Seeker</span>
+      </h1>
+      <h1 class="text-2xl mt-10 text-center uppercase hidden error-text">
+        Check Your Internet⛔⛔
+      </h1>
+      <div
+        class="flex-row gap-10 justify-center items-center mt-20 hero hidden"
+      >
+        <div class="bg-white shadow-lg flex flex-col rounded-xl w-1/4">
+          <!-- Country -->
+          <div class="p-5 border-b-2 flex justify-between gap-6">
+            <!-- Lable -->
+            <div class="">
+              <h1 class="font-bold text-2xl">Country</h1>
+              <p class="mt-5 country text-xl"></p>
+            </div>
+            <!--Map-->
+            <div class="">
+              <img
+                src=""
+                alt="country img"
+                class="flags object-cover w-20 h-10"
+              />
+            </div>
+          </div>
+
+          <!-- CITY -->
+          <div class="p-5 border-b-2 flex justify-between">
+            <!-- Lable -->
+            <div class="">
+              <h1 class="font-bold text-2xl">City</h1>
+              <p class="mt-5 city text-xl"></p>
+            </div>
+            <!-- VALUE -->
+            <div></div>
+          </div>
+
+          <!--Region-->
+
+          <div class="p-5 border-b-2 flex justify-between">
+            <!-- Lable -->
+
+            <div class="">
+              <h1 class="font-bold text-2xl">Region</h1>
+              <p class="mt-5 region text-xl"></p>
+            </div>
+            <!-- VALUE -->
+            <div></div>
+          </div>
+
+          <!--Street-->
+
+          <div class="p-5 border-b-2 flex justify-between">
+            <!-- Lable -->
+
+            <div class="">
+              <h1 class="font-bold text-2xl">Street</h1>
+              <p class="mt-5 text-xl street"></p>
+            </div>
+            <!-- VALUE -->
+            <div></div>
+          </div>
+        </div>
+
+        <!-- REST COUNTRY API DATA-->
+
+        <div
+          class="bg-white shadow-lg flex flex-col rounded-xl w-1/4 overflow-x-scroll"
+        >
+          <!-- Country Info -->
+
+          <div class="p-5 border-b-2 flex justify-between gap-6">
+            <!-- Lable -->
+            <div class="">
+              <h1 class="font-bold text-2xl">Continent</h1>
+              <p class="mt-5 maps text-xl continent"><a href=""></a></p>
+            </div>
+            <!--Map-->
+            <div class=""></div>
+          </div>
+          <!---->
+          <div class="p-5 border-b-2 flex justify-between gap-6">
+            <!-- Lable -->
+            <div class="">
+              <h1 class="font-bold text-2xl">currency</h1>
+              <p class="mt-5 currency text-xl"></p>
+            </div>
+            <!--Map-->
+            <div class=""></div>
+          </div>
+
+          <!--Maps-->
+
+          <div class="p-5 border-b-2 flex justify-between gap-6">
+            <!-- Lable -->
+            <div class="">
+              <h1 class="font-bold text-2xl">Google Map</h1>
+              <p class="mt-5 text-xl"><a class="maps" href="">Here</a></p>
+            </div>
+            <!--Map-->
+            <div class=""></div>
+          </div>
+
+          <!-- Contentent -->
+        </div>
+      </div>
+    </section>
+    <div class="mt-20 inital-data w-3/4 mx-auto">
+      <h1 class="text-center text-xl font-thin">
+        HERE IS POSITION SEKKER PROJECT
+      </h1>
+      <h1 class="text-center text-xl uppercase mt-5">
+        Please wait while the system loads. This may take a few moments.
+      </h1>
+      <h1 class="text-center text-xl font-thin mt-5 uppercase">
+        Check your <span class="font-bold text-orange-600">Network </span> and
+        allow <span class="font-bold text-orange-600">Location</span> Permission
+      </h1>
+      <button
+        class="btn py-3 px-6 font-bold border-2 mx-auto block my-6 text-xl bg-red-400 text-white"
+      >
+        Get Data
+      </button>
+    </div>
+  </body>
+</html>
