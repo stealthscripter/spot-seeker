@@ -48,8 +48,8 @@ function getGeoLocation(callback) {
             coutryName.textContent = data.country
             cityName.textContent = data.city
             regionName.textContent = data.region
-            // streetName.textContent = (null || data.intersection.street1) ?? "foo"
-            // streetName.textContent = data.poi.name
+            streetName.textContent = (null || data.staddress) ?? "foo"
+            streetName.textContent = data.poi.name
             const code = data.prov;
             return fetch(`https://restcountries.com/v3.1/alpha/${code}`)
         })
