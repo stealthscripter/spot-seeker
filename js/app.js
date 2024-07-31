@@ -49,7 +49,6 @@ const handleLocation = async (locations) => {
 
 
 const fetchIpData = async () => {
-    
     try{
       const res = await fetch("http://ip-api.com/json/")
       const data = await res.json()
@@ -58,12 +57,42 @@ const fetchIpData = async () => {
     catch(err){
         console.log(err.message)
     }
-
 }
 
 
+const fetchCountryData = async (countryCode) => {
+  try{
+      const res = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
+      const data = await res.json()
+      return data
+      }
+    catch(err){
+      console.log(err)
+    }
+    
+  }
 
+ 
+  const display = async () => {
+    try {
+        const data = await fetchIpData()
+        if (data && data.countryCode) {
+            const finalData = await fetchCountryData(data.countryCode)
+            coutryName.textContent = data.country
+            cityName.textContent = data.city
+            regionName.textContent = data.region
+            streetName.textContent = (null || data.staddress) ?? "street 404"
+            console.log(finalData)
+        } else {
+            console.log("Country code not found in IP data")
+            errorText.classList.remove('hidden')
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
+}
 
+display()
 
 
 
