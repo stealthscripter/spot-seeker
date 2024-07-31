@@ -110,3 +110,6 @@ btnHome.addEventListener('click', () => {
     btnContainer.style.opacity = 1
 })
 
+btnlocation.addEventListener('click' , () => {
+      getLocation()
+})
