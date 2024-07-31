@@ -7,102 +7,106 @@ const googleMaps = document.querySelector('.maps')
 const currency = document.querySelector('.currency')
 const countryFlag = document.querySelector('.flags')
 
+
+const btnContainer = document.querySelector('.btncontainer')
 const mainContainer = document.querySelector('.hero')
-const btn = document.querySelector('.btn')
+const btnlocation = document.querySelector('.btnlocation')
+const btnip = document.querySelector('.btnip')
 const errorText = document.querySelector('.error-text')
 const initalDataContainer = document.querySelector('.inital-data')  
 const continent = document.querySelector('.continent');
+const btnHome = document.querySelector('.btnhome')
 
-function getGeoLocation(callback) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          const latitude = position.coords.latitude;
-          const longitude =  position.coords.longitude;
-          // const latitude = 9.008208
-          // const longitude = 38.8485038
-          callback(latitude, longitude); // Pass the values to the callback function
-        }
-      );
+console.log("hello World")
+
+const getLocation = () => {
+  return new Promise((resolve , reject) => {
+        navigator.geolocation.getCurrentPosition(resolve , reject)
+  })
+}
+
+
+
+const handleLocation = async (locations) => {
+    try{
+        const res = await getLocation()
+        const {latitude , longitude } = res.coords
+        locations(latitude , longitude)
     }
+    catch(err){
+      console.log(err.message) 
+    }
+}
+
+// handleLocation((latitude , longitude) => {
+//   fetch(`https://geocode.xyz/${latitude},${longitude}?geoit=json&auth=436913924601987352488x50714`)
+//   .then(res => res.json())
+//   .then(data => console.log(data))
+// })
+
+// fetch("http://ip-api.com/json/").then(res => res.json()).then(data => {const countryCode = data.countryCode; return fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)})
+// .then(res => res.json()).then(data => console.log(data))
+
+
+const fetchIpData = async () => {
+    try{
+      const res = await fetch("http://ip-api.com/json/")
+      const data = await res.json()
+      return data
+    }
+    catch(err){
+        console.log(err.message)
+    }
+}
+
+
+const fetchCountryData = async (countryCode) => {
+  try{
+      const res = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
+      const data = await res.json()
+      return data
+      }
+    catch(err){
+      console.log(err)
+    }
+    
   }
 
-  const errorMsg = function(){
-      mainContainer.style.opacity = 0;
-      errorText.style.display = 'block';
-  }
-
-  const whereIAm = function(){
-
-    getGeoLocation(function(longitude,latitude){
-  
-        fetch(`https://geocode.xyz/${longitude},${latitude}?geoit=json&auth=436913924601987352488x50714`)
-        .then(response => {
-              console.log(response)
-              if(!response.ok) 
-              throw new Error(`Problem With GeoCoding ${response.status}`)
-              return response.json()
-          })
-        .then((data) => {
-            console.log(`You Are In ${data.city} ${data.country}`,data)
+ 
+  const display = async () => {
+    try {
+        const data = await fetchIpData()
+        if (data && data.countryCode) {
+            const finalData = await fetchCountryData(data.countryCode)
             coutryName.textContent = data.country
             cityName.textContent = data.city
             regionName.textContent = data.region
-            streetName.textContent = (null || data.staddress) ?? "foo"
-            streetName.textContent = data.poi.name
-            const code = data.prov;
-            return fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-        })
-        // Fetch USING REST COUNTRY API
-            .then(response => {
-              if(!response.ok)
-              throw new Error(`Country Not Found (${response.status})`)
-              return response.json()})
-            .then(data => {
-              console.log(data[0])
-              countryFlag.src = data[0].flags.png
-              currency.textContent = Object.values(data[0].currencies)[0].name
-              continent.textContent = data[0].continents
-              googleMaps.href = data[0].maps.googleMaps         
-              // renderCountry(data)
-              })
-  
+            streetName.textContent = (null || data.staddress) ?? "street 404"
+            console.log(finalData)
+        } else {
+            console.log("Country code not found in IP data")
+            errorText.classList.remove('hidden')
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
+}
 
-          
-        // Fetch Rest Country Api
-    })
-  }
-btn.addEventListener('click',function(){
-    mainContainer.style.display = 'flex';
-    initalDataContainer.style.opacity = 0;
-    whereIAm();
+display()
+
+
+
+
+btnip.addEventListener('click',() => {
+  mainContainer.style.display = 'flex';
+  initalDataContainer.style.opacity = 0;
+  btnContainer.style.opacity = 0
 
 })
 
-// Reference
-// const getCountryData = function(country){
-//   // Country 1
-//   fetch(`https://restcountries.com/v3.1/name/${country}`)
-//   .then(response => {console.log(response) 
-//                 if(!response.ok)
-//                 throw new Error(`Country Not Found (${response.status})`)
-//                       return response.json()})
-//   .then((data) => { 
-//       renderCountry(data[0])
-//       // const neighbour = data[0].borders[0];
-//       const neighbour = 'sjsl'
-//       console.log(data[0])
-//       if(!neighbour) return
-    
-//       // country 2
-//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-//       })
-//       .then(response  => {
-//         if(!response.ok)
-//         throw new Error(`Country Not Found(${response.status})`)
-//         response.json()})
-//       .then(data => renderCountry(data[0],'neighbour'))
-//       .catch(err => {renderError(`Something Went Wrong 💥💥💥💥${err.message}`)
-//       })
-//       .finally(() => {countriesContainer.style.opacity = 1})
-//     };
+btnHome.addEventListener('click', () => {
+    mainContainer.style.display = 'none'
+    initalDataContainer.style.opacity = 1
+    btnContainer.style.opacity = 1
+})
+
