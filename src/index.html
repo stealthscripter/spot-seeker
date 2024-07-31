@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/output.css" rel="stylesheet" />
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <script defer src="/js/app.js"></script>
   </head>
-  <body class="font-Lato bg-slate-100">
+  <body class="bg-slate-100">
     <!--MAIN SECTION-->
     <section class="">
       <h1 class="text-5xl text-center mt-36 font-bold uppercase">
@@ -115,7 +115,14 @@
 
           <!-- Contentent -->
         </div>
+
+  <button
+  class="btnhome py-3 px-6 font-bold border-2 text-xl bg-red-400 text-white"
+>
+  Back Home
+</button>
       </div>
+      
     </section>
     <div class="mt-20 inital-data w-3/4 mx-auto">
       <h1 class="text-center text-xl font-thin">
@@ -128,11 +135,20 @@
         Check your <span class="font-bold text-orange-600">Network </span> and
         allow <span class="font-bold text-orange-600">Location</span> Permission
       </h1>
-      <button
-        class="btn py-3 px-6 font-bold border-2 mx-auto block my-6 text-xl bg-red-400 text-white"
-      >
-        Get Data
-      </button>
     </div>
+
+    <div class="btncontainer mx-auto w-[40%] mt-4 flex justify-center">
+    <button
+    class="btnlocation py-3 px-6 font-bold border-2 mx-auto my-6 text-xl bg-red-400 text-white"
+  >
+    Get by Location
+  </button>
+
+  <button
+    class="btnip py-3 px-6 font-bold border-2 mx-auto my-6 text-xl bg-red-400 text-white"
+  >
+    Get by IP
+  </button>
+</div>
   </body>
 </html>
